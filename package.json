@@ -1,0 +1,25 @@
+{
+  "name": "simple-search-query",
+  "version": "0.0.1",
+  "description": "Simple search query matcher",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/othree/simple-search-query.git"
+  },
+  "keywords": [
+    "search",
+    "query",
+    "peg",
+    "parse"
+  ],
+  "author": "Kao, Wei-Ko (othree)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/othree/simple-search-query/issues"
+  },
+  "homepage": "https://github.com/othree/simple-search-query#readme"
+}
