@@ -1,6 +1,6 @@
 import { parse } from './query.js';
 
-let matchers = {
+const matchers = {
   default: (entry, query, options) => {
     if (options.i) {
       return (new RegExp(`\\b${query}\\b`, 'i')).test(entry);
@@ -21,7 +21,7 @@ let matchers = {
   },
 };
 
-let ops = {
+const ops = {
   and: (matcher, entry, ast, options) => {
     return check(matcher, entry, ast.left, options) && check(matcher, entry, ast.right, options);
   },
@@ -36,12 +36,12 @@ let ops = {
   },
 };
 
-let check = (matcher, entry, ast, options) => {
+const check = (matcher, entry, ast, options) => {
   return ops[ast.op](matcher, entry, ast, options);
 };
 
 export default (query) => {
-  let ast = parse(query);
+  const ast = parse(query);
   return (entry, options = {}) => {
     if (options.i === undefined) { options.i = true; }
 
