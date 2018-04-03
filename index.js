@@ -22,16 +22,29 @@ let matchers = {
 };
 
 let ops = {
-  and: (entry, ast, options) => {
-    return check(entry, ast.left, options) && check(entry, ast.right, options);
+  and: (matcher, entry, ast, options) => {
+    return check(matcher, entry, ast.left, options) && check(matcher, entry, ast.right, options);
   },
-  or: (entry, ast, options) => {
-    return check(entry, ast.left, options) || check(entry, ast.right, options);
+  or: (matcher, entry, ast, options) => {
+    return check(matcher, entry, ast.left, options) || check(matcher, entry, ast.right, options);
   },
-  noeq: (entry, ast, options) => {
+  noeq: (matcher, entry, ast, options) => {
     return !check(entry, ast.right, options);
   },
-  eq: (entry, ast, options) => {
+  eq: (matcher, entry, ast, options) => {
+    return matcher(entry, ast.right, options);
+  },
+};
+
+let check = (matcher, entry, ast, options) => {
+  return ops[ast.op](matcher, entry, ast, options);
+};
+
+export default (query) => {
+  let ast = parse(query);
+  return (entry, options = {}) => {
+    if (options.i === undefined) { options.i = true; }
+
     let customMatcher = options.matcher;
     let matcher = null;
     if (customMatcher) {
@@ -48,18 +61,6 @@ let ops = {
       throw new Error('Matcher not found');
     }
 
-    return matcher(entry, ast.right, options);
-  },
-};
-
-let check = (entry, ast, options) => {
-  return ops[ast.op](entry, ast, options);
-};
-
-export default (query) => {
-  let ast = parse(query);
-  return (entry, options = {}) => {
-    if (options.i === undefined) { options.i = true; }
-    return check(entry, ast, options);
+    return check(matcher, entry, ast, options);
   };
 };
