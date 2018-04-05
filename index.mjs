@@ -1,4 +1,4 @@
-import { parse } from './query.js';
+import { parse } from './query.mjs';
 
 const matchers = {
   default: (entry, query, options) => {

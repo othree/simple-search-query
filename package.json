@@ -2,10 +2,10 @@
   "name": "simple-search-query",
   "version": "0.0.2",
   "description": "Simple search query matcher",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {
-    "build": "pegjs --format es -o query.js ./query/query.pegjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "pegjs --format es -o query.mjs ./query/query.pegjs",
+    "test": "node --experimental-modules test/index.mjs"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,9 @@
     "url": "https://github.com/othree/simple-search-query/issues"
   },
   "homepage": "https://github.com/othree/simple-search-query#readme",
-  "dependencies": {
-    "pegjs": "0.11.0-dev.273"
+  "dependencies": {},
+  "devDependencies": {
+    "pegjs": "0.11.0-dev.273",
+    "tape": "^4.9.0"
   }
 }
