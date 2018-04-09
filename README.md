@@ -77,6 +77,16 @@ q(text, options);
     The custom matcher function should return boolean value to let q function to know if this is a match.
 
 
-### query
+## Query String Syntax
+
+Supports logic:
+
+* `and`, `&` infix
+* `or`, `|` infix
+* `not`, `!` prefix
+
+Supports subquery, use `()` to wrap sub expression.
+
+Supports quoted string, both double and single quoted string.
 
 [PEG.js]:https://pegjs.org/
