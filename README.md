@@ -14,11 +14,69 @@ This is a simple practice to know how to use [PEG.js][]. And my target is to bui
 ```js
 import query from 'simple-search-query';
 
-const q = query('XML or HTML');
+const q = query('XML or HTML or "Foo Bar"');
 
-console.log(q('XML/HTML')); // true
-console.log(q('XSLT')); // false
-console.log(q('XHTML')); // false, default matcher use word boundary
+q('XML/HTML'); // true
+q('XSLT'); // false
+q('XHTML'); // false, default matcher use word boundary
 ```
+
+## Reference
+
+### class `query`
+
+#### syntax
+
+```js
+query(query_string)
+```
+
+Return a `q` function can used to search by the given query_string.
+
+#### parameters
+
+*   `query_string`: The logic query string from user or other input.
+
+### function `q`
+
+#### syntax
+
+```js
+q(text);
+q(text, options);
+
+```
+
+#### parameters
+
+*   `text`: Text to search.  
+*   `options`: Optional options object.
+
+### Options Object
+
+*   `i`: Ignore case, default `true`.  
+*   `matcher`: Matcher function, default matcher function use regexp and word boundary like:
+
+    ```js
+    () => !!(new RegExp(`\\b${query}\\b`)).test(entry)
+    ```
+   
+    There are two more built in matcher function:
+    
+    `has`: Not care about word boundary, use `indexOf`.  
+    `eqeq`: Full match, use `===`.
+   
+    It's also possible to send custom mnatcher function, the function will receive following arguments by order:
+
+    1.  `entry`: Text to search.
+    2.  `query`: The item from parse query string. For example: `XML or HTML or "Foo Bar"`. The matcher function will be called three times
+        with different query argument. One is `XML`, second is `HTML`. The last one is `Foo Bar`.
+        
+    3.  `options`: Options object.
+
+    The custom matcher function should return boolean value to let q function to know if this is a match.
+
+
+### query
 
 [PEG.js]:https://pegjs.org/
