@@ -23,12 +23,15 @@ q('XHTML'); // false, default matcher use word boundary
 
 ## Reference
 
-### class `query`
+### function `query`
+
+Default export from **simple-search-query**.
 
 #### syntax
 
 ```js
 query(query_string)
+query(query_string, options)
 ```
 
 Return a `q` function can used to search by the given query_string.
@@ -36,6 +39,7 @@ Return a `q` function can used to search by the given query_string.
 #### parameters
 
 *   `query_string`: The logic query string from user or other input.
+*   `options`: Optional default options object.
 
 ### function `q`
 
