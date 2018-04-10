@@ -78,7 +78,8 @@ q(text, options);
         
     3.  `options`: Options object.
 
-    The custom matcher function should return boolean value to let q function to know if this is a match.
+    Custom matcher function need to handle ignore case setting in options object itself.
+    The custom matcher function should return boolean value, then q function will handle the rest (logic part of the query string).
 
 
 ## Query String Syntax
