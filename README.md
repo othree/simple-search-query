@@ -67,7 +67,7 @@ q(text, options);
    
     There are two more built in matcher function:
     
-    `has`: Not care about word boundary, use `indexOf`.  
+    `has`: Not care about word boundary, use `indexOf`. Since CJK characters are not work will with word boundary. `has` might be a good choice to search them.
     `eqeq`: Full match, use `===`.
 
     If you want to assign the default matcher in options, use `default`.
