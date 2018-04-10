@@ -41,3 +41,35 @@ test('Default Options', function (t) {
   t.ok(q('XHTML', {matcher: 'has'}));
 });
 
+test('Not Ignore Case', function (t) {
+  t.plan(4);
+
+  const q = query('XML or XHTML', {i: false});
+
+  t.notOk(q('xhtml'));
+  t.notOk(q('XHTml'));
+  t.notOk(q('xml'));
+  t.ok(q('XML'));
+});
+
+test('Custom Matcher', function (t) {
+  t.plan(4);
+
+  const q = query('HTML and XHTML', {i: false, matcher: () => true});
+
+  t.ok(q('xhtml'));
+  t.ok(q('XSL'));
+  t.ok(q('xml'));
+  t.ok(q('foo bar'));
+});
+
+test('Quoted String', function (t) {
+  t.plan(4);
+
+  const q = query('"foo bar" or XHTML');
+
+  t.ok(q('xhtml'));
+  t.ok(q('foo bar'));
+  t.notOk(q('foo  bar'));
+  t.notOk(q('foo barr'));
+});
