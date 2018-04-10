@@ -40,12 +40,15 @@ const check = (matcher, entry, ast, options) => {
   return ops[ast.op](matcher, entry, ast, options);
 };
 
-export default (query) => {
+export default (query, defaults = {}) => {
   const ast = parse(query);
-  return (entry, options = {}) => {
-    if (options.i === undefined) { options.i = true; }
 
-    let customMatcher = options.matcher;
+  if (defaults.i === undefined) { defaults.i = true; }
+
+  return (entry, options = {}) => {
+    let opt = {...defaults, ...options};
+
+    let customMatcher = opt.matcher;
     let matcher = null;
     if (customMatcher) {
       if (typeof customMatcher == 'string') {
@@ -61,6 +64,6 @@ export default (query) => {
       throw new Error('Matcher not found');
     }
 
-    return check(matcher, entry, ast, options);
+    return check(matcher, entry, ast, opt);
   };
 };

@@ -31,3 +31,13 @@ test('Eqeq Matcher', function (t) {
   t.ok(q('XML', {matcher: 'eqeq'}));
 });
 
+test('Default Options', function (t) {
+  t.plan(3);
+
+  const q = query('XML or HTML', {matcher: 'eqeq'});
+
+  t.ok(q('HTML'));
+  t.notOk(q('XHTML'));
+  t.ok(q('XHTML', {matcher: 'has'}));
+});
+
