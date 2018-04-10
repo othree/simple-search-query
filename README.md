@@ -69,6 +69,8 @@ q(text, options);
     
     `has`: Not care about word boundary, use `indexOf`.  
     `eqeq`: Full match, use `===`.
+
+    If you want to assign the default matcher in options, use `default`.
    
     It's also possible to send custom mnatcher function, the function will receive following arguments by order:
 
