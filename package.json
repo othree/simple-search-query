@@ -1,6 +1,6 @@
 {
   "name": "simple-search-query",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Simple search query matcher",
   "main": "index.mjs",
   "scripts": {
