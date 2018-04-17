@@ -11,6 +11,16 @@ test('Basic Test', function (t) {
   t.ok(q('XML'));
 });
 
+test('Not Query', function (t) {
+  t.plan(3);
+
+  const q = query('not XML and not XHTML');
+
+  t.ok(q('HTML'));
+  t.notOk(q('XHTML'));
+  t.notOk(q('XML'));
+});
+
 test('Has Matcher', function (t) {
   t.plan(3);
 

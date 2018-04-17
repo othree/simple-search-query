@@ -29,7 +29,7 @@ const ops = {
     return check(matcher, entry, ast.left, options) || check(matcher, entry, ast.right, options);
   },
   noeq: (matcher, entry, ast, options) => {
-    return !check(entry, ast.right, options);
+    return !check(matcher, entry, ast.right, options);
   },
   eq: (matcher, entry, ast, options) => {
     return matcher(entry, ast.right, options);
