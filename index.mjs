@@ -22,22 +22,14 @@ const matchers = {
 };
 
 const ops = {
-  and: (matcher, entry, ast, options) => {
-    return check(matcher, entry, ast.left, options) && check(matcher, entry, ast.right, options);
-  },
-  or: (matcher, entry, ast, options) => {
-    return check(matcher, entry, ast.left, options) || check(matcher, entry, ast.right, options);
-  },
-  noeq: (matcher, entry, ast, options) => {
-    return !check(matcher, entry, ast.right, options);
-  },
-  eq: (matcher, entry, ast, options) => {
-    return matcher(entry, ast.right, options);
-  },
+  and: (ast, ...args) => check(ast.left, ...args) && check(ast.right, ...args),
+  or: (ast, ...args) => check(ast.left, ...args) || check(ast.right, ...args),
+  noeq: (ast, ...args) => !check(ast.right, ...args),
+  eq: (ast, matcher, entry, options) => matcher(entry, ast.right, options),
 };
 
-const check = (matcher, entry, ast, options) => {
-  return ops[ast.op](matcher, entry, ast, options);
+const check = (ast, matcher, entry, options) => {
+  return ops[ast.op](ast, matcher, entry, options);
 };
 
 export default (query, defaults = {}) => {
@@ -64,6 +56,6 @@ export default (query, defaults = {}) => {
       throw new Error('Matcher not found');
     }
 
-    return check(matcher, entry, ast, opt);
+    return check(ast, matcher, entry, opt);
   };
 };
